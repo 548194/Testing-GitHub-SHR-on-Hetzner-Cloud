@@ -17,7 +17,7 @@ jobs:
           mode: create
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           hcloud_token: ${{ secrets.HETZNER_CLOUD_API_TOKEN }}
-          server_type: cpx21
+          server_type: cx32
           image: ubuntu-24.04
 
   do-the-job:
