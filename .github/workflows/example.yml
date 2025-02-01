@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Hello from runner
         run: |
-          dnf install podman -y
+          apt install podman -y
           podman run "quay.io/podman/hello:latest"
 
   delete-runner:
