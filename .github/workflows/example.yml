@@ -43,6 +43,6 @@ jobs:
         with:
           mode: delete
           github_token: ${{ secrets.GH_ACTION_SELF_HOSTED_RUNNERS_PERSONAL_ACCESS_TOKEN }}
-          hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERSN }}
+          hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
           name: ${{ needs.create-runner.outputs.label }}
           server_id: ${{ needs.create-runner.outputs.server_id }}
