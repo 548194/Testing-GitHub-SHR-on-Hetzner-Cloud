@@ -17,4 +17,4 @@ jobs:
             
       - name: Build
         run: |
-          docker buildx build --platform=linux/arm64  
+          docker buildx build --platform=linux/arm64  .
