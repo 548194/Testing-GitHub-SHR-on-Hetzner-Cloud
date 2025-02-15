@@ -1,0 +1,58 @@
+name: "Set up QEMU - Github Self Hosted Runner"
+on:
+  workflow_dispatch:
+
+jobs:
+  create-runner:
+    name: Create Hetzner Cloud runner
+    runs-on: ubuntu-24.04
+    outputs:
+      label: ${{ steps.create-hcloud-runner.outputs.label }}
+      server_id: ${{ steps.create-hcloud-runner.outputs.server_id }}
+    steps:
+      - name: Create runner
+        id: create-hcloud-runner
+        uses: Cyclenerd/hcloud-github-runner@v1
+        with:
+          mode: create
+          github_token: ${{ secrets.GH_ACTION_SELF_HOSTED_RUNNERS_PERSONAL_ACCESS_TOKEN }}
+          hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
+          server_type: cax11
+          image: ubuntu-24.04
+
+  do-the-job:
+    name: Do the job on the runner
+    needs: create-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.create-runner.outputs.label }} # run the job on the newly created runner
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+            
+      - name: Build
+        run: |
+          docker buildx build --platform=linux/arm64  .
+
+  delete-runner:
+    name: Delete Hetzner Cloud runner
+    needs:
+      - create-runner # required to get output from the create-runner job
+      - do-the-job # required to wait when the main job is done
+    runs-on: ubuntu-24.04
+    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    steps:
+      - name: Delete runner
+        uses: Cyclenerd/hcloud-github-runner@v1
+        with:
+          mode: delete
+          github_token: ${{ secrets.GH_ACTION_SELF_HOSTED_RUNNERS_PERSONAL_ACCESS_TOKEN }}
+          hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
+          name: ${{ needs.create-runner.outputs.label }}
+          server_id: ${{ needs.create-runner.outputs.server_id }}
