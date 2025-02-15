@@ -1,4 +1,4 @@
-name: "Set up QEMU"
+name: "Set up QEMU - Github Online Runner"
 on:
   workflow_dispatch:
 
