@@ -7,7 +7,7 @@ RUN apt-get update && \
     curl \
     gnupg \
     lsb-release && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg \
     chmod 644 /etc/apt/keyrings/docker.gpg
    
 RUN echo \
