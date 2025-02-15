@@ -1,0 +1,16 @@
+name: "Set up QEMU"
+on:
+  workflow_dispatch:
+
+jobs:
+  do-the-job:
+    - name: Set up QEMU
+    uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+    id: buildx
+    uses: docker/setup-buildx-action@v2
+            
+    - name: Build
+    run: |
+      docker buildx build --platform=linux/arm64  
