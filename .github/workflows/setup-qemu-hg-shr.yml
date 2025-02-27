@@ -17,7 +17,7 @@ jobs:
           mode: create
           github_token: ${{ secrets.GH_ACTION_SELF_HOSTED_RUNNERS_PERSONAL_ACCESS_TOKEN }}
           hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
-          server_type: cax11
+          server_type: cx32
           #image: docker-ce
           image: 220706232
 
