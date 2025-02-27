@@ -20,6 +20,7 @@ jobs:
           server_type: cx32
           #image: docker-ce
           image: 220706232
+          server_wait: 120
 
   do-the-job:
     name: Do the job on the runner
