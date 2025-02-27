@@ -19,7 +19,7 @@ jobs:
           hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
           server_type: cax11
           #image: docker-ce
-          image: gh-shr-ubuntu2204-20250227-035540
+          image: 220706232
 
   do-the-job:
     name: Do the job on the runner
