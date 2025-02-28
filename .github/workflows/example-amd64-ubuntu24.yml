@@ -17,8 +17,10 @@ jobs:
           mode: create
           github_token: ${{ secrets.GH_ACTION_SELF_HOSTED_RUNNERS_PERSONAL_ACCESS_TOKEN }}
           hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
-          server_type: cx42
-          image: ubuntu-24.04
+          server_type: cx32
+          #image: docker-ce
+          image: 220741869
+          server_wait: 120
 
   do-the-job:
     name: Do the job on the runner
