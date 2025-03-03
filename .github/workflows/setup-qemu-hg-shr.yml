@@ -19,7 +19,7 @@ jobs:
           hcloud_token: ${{ secrets.HETZNER_CLOUD_GITHUB_SELF_HOSTED_RUNNERS }}
           server_type: cx32
           #image: docker-ce
-          image: 221518524
+          image: 221565628
           server_wait: 120
 
   do-the-job:
